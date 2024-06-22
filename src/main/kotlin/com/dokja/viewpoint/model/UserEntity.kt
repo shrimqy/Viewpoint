@@ -2,7 +2,7 @@ package com.dokja.viewpoint.model
 
 import java.util.Date
 
-data class User(
+data class UserEntity(
     val id: String,
     val username: String,
     val passwordHash: String,
@@ -13,12 +13,11 @@ data class User(
     val bio: String?,
 
     val userBook: UserBook
-) {
-}
+)
 
 data class UserBook(
     val id: String,
-    val user: User,
+    val user: UserEntity,
     val book: Book,
     val bookCategory: BookCategory,
     val pagesRead: String?,
