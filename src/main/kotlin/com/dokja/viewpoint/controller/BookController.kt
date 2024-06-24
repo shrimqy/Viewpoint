@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/books")
-class BookController(@Autowired private val bookService: BookService) {
+class BookController (private val bookService: BookService) {
     @GetMapping
     fun getAllBooks(): ResponseEntity<Map<String, Any>> {
         return try {
@@ -31,7 +31,6 @@ class BookController(@Autowired private val bookService: BookService) {
             ResponseEntity.ok(mapOf("books" to books))
         } catch (e: Exception) {
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(mapOf("error" to "Internal server error"))
-
         }
     }
 }

@@ -1,8 +1,14 @@
 package com.dokja.viewpoint.model
 
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import jakarta.persistence.Table
 import java.util.Date
 
-data class UserEntity(
+//@Entity
+//@Table(name = "User")
+data class User(
+//    @Id
     val id: String,
     val username: String,
     val passwordHash: String,
@@ -11,13 +17,12 @@ data class UserEntity(
     val updatedAt: Date,
     val avatar: String?,
     val bio: String?,
-
     val userBook: UserBook
 )
 
 data class UserBook(
     val id: String,
-    val user: UserEntity,
+    val user: User,
     val book: Book,
     val bookCategory: BookCategory,
     val pagesRead: String?,

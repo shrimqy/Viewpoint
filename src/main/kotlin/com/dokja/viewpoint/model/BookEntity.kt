@@ -29,9 +29,12 @@ data class Book(
     val firstPublished: LocalDateTime?
 )
 
+//@Entity
+//@Table(name = "BookCategory")
 data class BookCategory(
-    @Id val id: Int,
+//    @Id
+    val id: Int,
     val name: String,
     val userBook: UserBook,
-    val user: UserEntity
+    val user: User
 )
