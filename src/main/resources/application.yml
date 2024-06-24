@@ -5,10 +5,20 @@ spring:
     url: jdbc:postgresql://localhost:5432/twsa
     username: postgres
     password: 2009
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+      naming:
+        #To be more in line with database schema (Disables camel case to underscore naming strategy
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
     properties:
       hibernate:
+        format_sql: true
+        globally_quoted_identifiers: true #quote all identifiers, preserving their case.
         dialect: org.hibernate.dialect.PostgreSQLDialect
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
