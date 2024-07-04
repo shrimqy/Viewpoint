@@ -29,12 +29,14 @@ data class Book(
     val firstPublished: LocalDateTime?
 )
 
-//@Entity
-//@Table(name = "BookCategory")
+@Entity
+@Table(name = "BookCategory")
 data class BookCategory(
-//    @Id
+    @Id
+    @Column(name = "id")
     val id: Int,
+    @Column(name = "name")
     val name: String,
-    val userBook: UserBook,
-    val user: User
+    @ManyToMany(mappedBy = "bookCategories")
+    val userBooks: List<UserBook>
 )
