@@ -1,8 +1,11 @@
 package com.dokja.viewpoint.model
 
 import jakarta.persistence.*
+import org.hibernate.annotations.JdbcTypeCode
+import org.hibernate.type.SqlTypes
 import java.time.LocalDateTime
 import java.util.Date
+
 
 enum class Role {
     USER, ADMIN
@@ -28,6 +31,8 @@ data class User(
     val bio: String?,
     @OneToMany(mappedBy = "user")
     val userBooks: List<UserBook>?,
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Basic(optional = false)
     val role: Role
 )
 
