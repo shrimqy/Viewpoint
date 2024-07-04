@@ -34,7 +34,7 @@ class UserController(
     
     
     private fun User.toResponse(authService: AuthService, authRequest: AuthRequest): AuthResponse =
-        authService.authentication(authRequest, userDetails = this)
+        authService.authentication(authRequest, user = this)
 
     private fun AuthRequest.toModel(): User =
         User(
