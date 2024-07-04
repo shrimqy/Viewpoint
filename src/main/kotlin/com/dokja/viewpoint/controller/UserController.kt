@@ -7,6 +7,7 @@ import com.dokja.viewpoint.model.User
 import com.dokja.viewpoint.service.AuthService
 import com.dokja.viewpoint.service.UserService
 import org.springframework.http.HttpStatus
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -18,9 +19,10 @@ import java.util.*
 @RequestMapping("/api/user/")
 class UserController(
     private val userService: UserService,
-    private val authService: AuthService
+    private val authService: AuthService,
+    val passwordEncoder: BCryptPasswordEncoder
 ) {
-    @PostMapping("/signUp")
+    @PostMapping("/signup")
     fun signUp(@RequestBody authRequest: AuthRequest): AuthResponse =
         userService.signUp(authRequest.toModel())
             ?.toResponse(authService, authRequest)
@@ -40,7 +42,7 @@ class UserController(
         User(
             id = UUID.randomUUID().toString(),
             username = this.username,
-            passwordHash = this.password,
+            passwordHash = passwordEncoder.encode(this.password),
             createdAt = Date(System.currentTimeMillis()),
             updatedAt = Date(System.currentTimeMillis()),
             bio = null,
