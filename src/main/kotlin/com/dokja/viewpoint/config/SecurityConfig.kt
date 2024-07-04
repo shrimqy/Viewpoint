@@ -28,13 +28,13 @@ class SecurityConfig(private val authenticationProvider: AuthenticationProvider)
     fun securityFilterChain(
         http: HttpSecurity,
         jwtAuthFilter: JwtAuthFilter
-    ): DefaultSecurityFilterChain =
+    ): DefaultSecurityFilterChain {
         http
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/api/auth", "api/auth/refresh", "/error").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
+                    .requestMatchers("/api/signup", "api/auth/refresh", "/error").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/user", "/api/user/signup", "/api/user/login").permitAll()
                     .requestMatchers("/api/user**")
                     .hasRole("ADMIN")
                     .anyRequest()
@@ -45,34 +45,7 @@ class SecurityConfig(private val authenticationProvider: AuthenticationProvider)
             }
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter::class.java)
-            .build()
 
-//    fun configure(http: HttpSecurity) {
-//        http
-//            .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-//            .and()
-//            .authorizeRequests()
-//            .requestMatchers("/api/user/login", "/api/user/signup").permitAll()
-//            .anyRequest().authenticated()
-//            .and()
-//            .formLogin()
-//            .loginProcessingUrl("/api/user/login")
-//            .successHandler(AuthenticationSuccessHandler { request, response, authentication ->
-//                response.contentType = "application/json"
-//                response.status = HttpServletResponse.SC_OK
-//                response.outputStream.println("{\"success\":true}")
-//            })
-//            .failureHandler(AuthenticationFailureHandler { request, response, exception ->
-//                response.contentType = "application/json"
-//                response.status = HttpServletResponse.SC_UNAUTHORIZED
-//                response.outputStream.println("{\"success\":false,\"error\":\"${exception.message}\"}")
-//            })
-//            .and()
-//            .logout()
-//            .logoutUrl("/api/user/logout")
-//            .logoutSuccessHandler(HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK))
-//            .and()
-//            .sessionManagement()
-//            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-//    }
+        return http.build()
+    }
 }
