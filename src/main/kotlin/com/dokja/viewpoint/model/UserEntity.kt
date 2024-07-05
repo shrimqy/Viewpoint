@@ -31,6 +31,15 @@ data class User(
     val bio: String?,
     @OneToMany(mappedBy = "user")
     val userBooks: List<UserBook>?,
+    @ManyToMany
+    @JoinTable(
+        name = "User_BookCategory",
+        joinColumns = [JoinColumn(name = "userID")],
+        inverseJoinColumns = [JoinColumn(name = "bookCategoryID")]
+    )
+    val bookCategories: List<BookCategory> = listOf(),
+
+    // Work around the default string mapping.
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Basic(optional = false)
     val role: Role
