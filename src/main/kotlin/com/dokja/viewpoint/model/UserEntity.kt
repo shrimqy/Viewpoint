@@ -33,9 +33,9 @@ data class User(
     val userBooks: List<UserBook>?,
     @ManyToMany
     @JoinTable(
-        name = "User_BookCategory",
-        joinColumns = [JoinColumn(name = "userID")],
-        inverseJoinColumns = [JoinColumn(name = "bookCategoryID")]
+        name = "_UserBookCategory",
+        joinColumns = [JoinColumn(name = "B")],
+        inverseJoinColumns = [JoinColumn(name = "A")]
     )
     val bookCategories: List<BookCategory> = listOf(),
 
@@ -59,9 +59,9 @@ data class UserBook(
     val book: Book,
     @ManyToMany
     @JoinTable(
-        name = "UserBook_BookCategory",
-        joinColumns = [JoinColumn(name = "userBookID")],
-        inverseJoinColumns = [JoinColumn(name = "bookCategoryID")]
+        name = "_BookCategory",
+        joinColumns = [JoinColumn(name = "A")],
+        inverseJoinColumns = [JoinColumn(name = "B")]
     )
     val bookCategories: List<BookCategory>,
     @Column(name = "pagesRead")

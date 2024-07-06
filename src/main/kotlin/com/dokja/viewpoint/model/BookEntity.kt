@@ -38,7 +38,7 @@ data class BookCategory(
     @Column(name = "name")
     val name: String,
     @ManyToMany(mappedBy = "bookCategories")
-    val userBooks: List<UserBook>,
+    val userBooks: List<UserBook> = emptyList(),
     @ManyToMany(mappedBy = "bookCategories")
     val users: List<User> = listOf()
 )

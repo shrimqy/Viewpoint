@@ -33,10 +33,10 @@ class SecurityConfig(private val authenticationProvider: AuthenticationProvider)
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/api/signup", "api/auth/refresh", "/error").permitAll()
+                    .requestMatchers("/api/signup", ".api/books/search", "/error").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/user", "/api/user/signup", "/api/user/login").permitAll()
-                    .requestMatchers("/api/user**")
-                    .hasRole("ADMIN")
+//                    .requestMatchers("/api/user**")
+//                    .hasRole("ADMIN")
                     .anyRequest()
                     .fullyAuthenticated()
             }

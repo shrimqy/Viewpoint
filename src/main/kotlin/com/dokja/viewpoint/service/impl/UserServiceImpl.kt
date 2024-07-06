@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service
 @Service
 class UserServiceImpl(
     private val userRepository: UserRepository,
-    private val passwordEncoder: BCryptPasswordEncoder,
 ) : UserService {
+
     override fun signUp(user: User): User? {
         if (userRepository.findByUsername(user.username) != null) {
             throw UsernameAlreadyExistsException("Username already exists")
@@ -30,4 +30,6 @@ class UserServiceImpl(
     override fun findBbyUsername(username: String): User {
         return userRepository.findByUsername(username) ?: throw UsernameNotFoundException("User not found")
     }
+
+
 }

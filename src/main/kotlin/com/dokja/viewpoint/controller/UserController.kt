@@ -2,6 +2,7 @@ package com.dokja.viewpoint.controller
 
 import com.dokja.viewpoint.dto.AuthRequest
 import com.dokja.viewpoint.dto.AuthResponse
+import com.dokja.viewpoint.model.BookCategory
 import com.dokja.viewpoint.model.Role
 import com.dokja.viewpoint.model.User
 import com.dokja.viewpoint.service.AuthService
@@ -48,6 +49,17 @@ class UserController(
             bio = null,
             avatar = null,
             userBooks = null,
+            bookCategories = predefinedCategories,
             role = Role.USER
         )
 }
+
+
+private val predefinedCategories = listOf(
+    BookCategory(id = 1, name = "All"),
+    BookCategory(id = 2, name = "Reading"),
+    BookCategory(id = 3, name = "Planning"),
+    BookCategory(id = 4, name = "Paused"),
+    BookCategory(id = 5, name = "Dropped"),
+    BookCategory(id = 6, name = "Completed")
+)
