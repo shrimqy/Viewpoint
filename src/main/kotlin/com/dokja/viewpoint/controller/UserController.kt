@@ -7,6 +7,7 @@ import com.dokja.viewpoint.model.Role
 import com.dokja.viewpoint.model.User
 import com.dokja.viewpoint.service.AuthService
 import com.dokja.viewpoint.service.UserService
+import com.dokja.viewpoint.utils.predefinedCategories
 import org.springframework.http.HttpStatus
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.PostMapping
@@ -55,11 +56,3 @@ class UserController(
 }
 
 
-private val predefinedCategories = listOf(
-    BookCategory(id = 1, name = "All"),
-    BookCategory(id = 2, name = "Reading"),
-    BookCategory(id = 3, name = "Planning"),
-    BookCategory(id = 4, name = "Paused"),
-    BookCategory(id = 5, name = "Dropped"),
-    BookCategory(id = 6, name = "Completed")
-)
